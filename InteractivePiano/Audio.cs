@@ -1,13 +1,14 @@
 ﻿using System;
 using NAudio.Wave;
 
-namespace KeyboardPiano
+namespace InteractivePiano
 {
     /// <summary>
     /// This class is used to play a stream of doubles that represent audio samples
     /// </summary>
-    class Audio
+    public sealed class Audio: IDisposable
     {
+        private static Audio instance = new Audio();
         private WaveOutEvent _waveOut;
         private WaveFormat _waveFormat;
         private BufferedWaveProvider _bufferedWaveProvider;
@@ -20,6 +21,18 @@ namespace KeyboardPiano
         /// </summary>
         /// <param name="bufferSize">Length of buffer held in this class, default is 4096</param>
         /// <param name="samplingRate">Audio sampling rate,, default value is 44100</param>
+
+        static Audio(){}
+        private Audio(){}
+
+        public static Audio Instance {
+            get {
+                return instance;
+            }
+        }
+
+        
+
         public Audio(int bufferSize = 4096 * 16, int samplingRate = 44100)
         {
             _waveOut = new WaveOutEvent();
@@ -30,6 +43,20 @@ namespace KeyboardPiano
 
             _waveOut.Init(_bufferedWaveProvider);
             _waveOut.Play();
+        }
+
+        public void Reset() {
+            _bufferCount = 0;
+            _bufferedWaveProvider.ClearBuffer();
+            
+        }
+
+        public void Dispose() {
+            Instance = null;
+            _bufferedWaveProvider = null;
+            _waveOut.Stop();
+            _waveOut = null;
+
         }
 
         /// <summary>
