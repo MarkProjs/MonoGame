@@ -30,4 +30,7 @@
   <ItemGroup>
     <ProjectReference Include="..\PianoSimulation\PianoSimulation.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="NAudio" Version="2.1.0" />
+  </ItemGroup>
 </Project>

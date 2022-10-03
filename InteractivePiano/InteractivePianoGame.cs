@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using PianoSimulation;
 
 namespace InteractivePiano
 {
@@ -8,12 +9,17 @@ namespace InteractivePiano
     {
         private GraphicsDeviceManager _graphics;
        private SpriteBatch _spriteBatch;
+       private Piano piano;
+       private Audio audio;
+
 
         public InteractivePianoGame()
         {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
+            piano = new Piano();
+            audio = new Audio();
         }
 
         protected override void Initialize()
@@ -34,10 +40,26 @@ namespace InteractivePiano
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-
+                     
             // TODO: Add your update logic here
-
-            base.Update(gameTime);
+            string inputKey = "";
+            var keyPressed = Keyboard.GetState().GetPressedKeys();
+            if (keyPressed.Length > 0) {
+                inputKey = keyPressed[0].ToString().ToLower();
+            }
+            
+            foreach (char item in inputKey) {
+                if (piano.Keys.Contains(item)) {
+                    piano.StrikeKey(item);
+                    for (int i = 0; i < 44100 * 3; i++) {
+                        audio.Play(piano.Play());
+                    }
+                    audio.Reset();
+                }
+            }
+             base.Update(gameTime);
+            
+           
         }
 
         protected override void Draw(GameTime gameTime)

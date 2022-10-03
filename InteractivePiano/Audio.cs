@@ -8,7 +8,7 @@ namespace InteractivePiano
     /// </summary>
     public sealed class Audio: IDisposable
     {
-        private static Audio instance = new Audio();
+        private readonly static Audio instance = new Audio();
         private WaveOutEvent _waveOut;
         private WaveFormat _waveFormat;
         private BufferedWaveProvider _bufferedWaveProvider;
@@ -22,9 +22,7 @@ namespace InteractivePiano
         /// <param name="bufferSize">Length of buffer held in this class, default is 4096</param>
         /// <param name="samplingRate">Audio sampling rate,, default value is 44100</param>
 
-        static Audio(){}
-        private Audio(){}
-
+       
         public static Audio Instance {
             get {
                 return instance;
@@ -52,7 +50,6 @@ namespace InteractivePiano
         }
 
         public void Dispose() {
-            Instance = null;
             _bufferedWaveProvider = null;
             _waveOut.Stop();
             _waveOut = null;
