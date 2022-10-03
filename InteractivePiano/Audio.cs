@@ -8,7 +8,8 @@ namespace InteractivePiano
     /// </summary>
     public sealed class Audio: IDisposable
     {
-        private readonly static Audio instance = new Audio();
+        private static Audio instance = null;
+        private static readonly object padlock = new Object();
         private WaveOutEvent _waveOut;
         private WaveFormat _waveFormat;
         private BufferedWaveProvider _bufferedWaveProvider;
@@ -25,7 +26,13 @@ namespace InteractivePiano
        
         public static Audio Instance {
             get {
-                return instance;
+                lock (padlock) {
+                    if (instance == null) {
+                        instance = new Audio();
+                    }
+                    return instance;
+                }
+                
             }
         }
 
