@@ -1,8 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
 using PianoSimulation;
-using System.Text;
 
 namespace InteractivePiano
 {
@@ -64,119 +64,62 @@ namespace InteractivePiano
         }
 
         private void Inputs(string KeyString, string LetterKeys, KeyboardState state){
+            var strikes = new List<char>();
             if (LetterKeys.Contains(KeyString)) {
-                foreach(char keyValue in KeyString) {
-                    piano.StrikeKey(keyValue);
-                    for (int i = 0; i < 44100 * 3; i++) {
-                        audio.Play(piano.Play());
-                    }
-                    audio.Reset();
-                }
+                strikes.AddRange(KeyString);
             }
             else if (state.IsKeyDown(Keys.D2)) {
-                piano.StrikeKey('2');
-                    for (int i = 0; i < 44100 * 3; i++) {
-                        audio.Play(piano.Play());
-                    }
-                    audio.Reset();
+                strikes.Add('2');
             }
             else if (state.IsKeyDown(Keys.D4)) {
-                piano.StrikeKey('4');
-                    for (int i = 0; i < 44100 * 3; i++) {
-                        audio.Play(piano.Play());
-                    }
-                    audio.Reset();
+                strikes.Add('4');
             }
             else if (state.IsKeyDown(Keys.D5)) {
-                piano.StrikeKey('5');
-                    for (int i = 0; i < 44100 * 3; i++) {
-                        audio.Play(piano.Play());
-                    }
-                    audio.Reset();
+                strikes.Add('5');
             }
             else if (state.IsKeyDown(Keys.D7)) {
-                piano.StrikeKey('7');
-                    for (int i = 0; i < 44100 * 3; i++) {
-                        audio.Play(piano.Play());
-                    }
-                    audio.Reset();
+                strikes.Add('7');
             }
             else if (state.IsKeyDown(Keys.D8)) {
-                piano.StrikeKey('8');
-                    for (int i = 0; i < 44100 * 3; i++) {
-                        audio.Play(piano.Play());
-                    }
-                    audio.Reset();
+                strikes.Add('8');
             }
             else if (state.IsKeyDown(Keys.D9)) {
-                piano.StrikeKey('9');
-                    for (int i = 0; i < 44100 * 3; i++) {
-                        audio.Play(piano.Play());
-                    }
-                    audio.Reset();
+                strikes.Add('9');
             }
             else if (state.IsKeyDown(Keys.OemMinus)) {
-                piano.StrikeKey('-');
-                    for (int i = 0; i < 44100 * 3; i++) {
-                        audio.Play(piano.Play());
-                    }
-                    audio.Reset();
+                strikes.Add('-');
             }
             else if (state.IsKeyDown(Keys.OemOpenBrackets)) {
-                piano.StrikeKey('[');
-                    for (int i = 0; i < 44100 * 3; i++) {
-                        audio.Play(piano.Play());
-                    }
-                    audio.Reset();
+                strikes.Add('[');
             }
             else if (state.IsKeyDown(Keys.OemPlus)) {
-                piano.StrikeKey('=');
-                    for (int i = 0; i < 44100 * 3; i++) {
-                        audio.Play(piano.Play());
-                    }
-                    audio.Reset();
+                strikes.Add('=');
             }
             else if (state.IsKeyDown(Keys.OemComma)) {
-                piano.StrikeKey(',');
-                    for (int i = 0; i < 44100 * 3; i++) {
-                        audio.Play(piano.Play());
-                    }
-                    audio.Reset();
+                strikes.Add(',');
             }
             else if (state.IsKeyDown(Keys.OemPeriod)) {
-                piano.StrikeKey('.');
-                    for (int i = 0; i < 44100 * 3; i++) {
-                        audio.Play(piano.Play());
-                    }
-                    audio.Reset();
+                strikes.Add('.');
             }
             else if (state.IsKeyDown(Keys.OemSemicolon)) {
-                piano.StrikeKey(';');
-                    for (int i = 0; i < 44100 * 3; i++) {
-                        audio.Play(piano.Play());
-                    }
-                    audio.Reset();
+                strikes.Add(';');
             }
             else if (state.IsKeyDown(Keys.OemQuestion)) {
-                piano.StrikeKey('/');
-                    for (int i = 0; i < 44100 * 3; i++) {
-                        audio.Play(piano.Play());
-                    }
-                    audio.Reset();
+                strikes.Add('/');
             }
             else if (state.IsKeyDown(Keys.OemQuotes)) {
-                piano.StrikeKey('\'');
-                    for (int i = 0; i < 44100 * 3; i++) {
-                        audio.Play(piano.Play());
-                    }
-                    audio.Reset();
+                strikes.Add('\'');
             }
             else if (state.IsKeyDown(Keys.Space)) {
-                piano.StrikeKey(' ');
-                    for (int i = 0; i < 44100 * 3; i++) {
-                        audio.Play(piano.Play());
-                    }
-                    audio.Reset();
+                strikes.Add(' ');
+            }
+
+            foreach (char strikeKey in strikes) {
+                piano.StrikeKey(strikeKey);
+                for (int i = 0; i < 44100 * 3; i++) {
+                    audio.Play(piano.Play());
+                }
+                audio.Reset();
             }
         }
     }
