@@ -13,7 +13,7 @@ namespace InteractivePiano
         private Game _game;
 
         private int _moveRight;
-        private Color _colorTile = Color.Black;
+        private Color _colorTile = Color.White;
 
         public BlackTileSprite(InteractivePianoGame game, int MoveRight) : base(game) {
             _game = game;

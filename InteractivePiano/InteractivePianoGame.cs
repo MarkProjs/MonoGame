@@ -16,7 +16,6 @@ namespace InteractivePiano
         private List<WhiteTileSprite> WhiteTileList = new List<WhiteTileSprite>();
         private List<BlackTileSprite> BlackTileList = new List<BlackTileSprite>();
 
-        private int _whiteTileMoveRight = 0;
         public InteractivePianoGame()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -27,17 +26,20 @@ namespace InteractivePiano
         }
 
         protected override void Initialize()
-        {
+        {   
+            _graphics.PreferredBackBufferWidth = 1200;
+            _graphics.ApplyChanges();
+            //whitetile: qwertyuiop[zxcvbnm,./*space*
+            //blacktile: 245789-=dfgjk;'
             // TODO: Add your initialization logic here
             //white, black, white, white, black, white, black, white, white, black, white
             //black, white, black, white, white, black, white, black
             
             
-            for (int i = 0; i< 11;i++) {
-                WhiteTileSprite b = new WhiteTileSprite(this, _whiteTileMoveRight);
+            for (int i = 0; i< 22;i++) {
+                WhiteTileSprite b = new WhiteTileSprite(this, (i*54));
                 WhiteTileList.Add(b);
                 Components.Add(b);
-                _whiteTileMoveRight += 54;
             }
 
             BlackTileList.Add(new BlackTileSprite(this, 38));
@@ -48,6 +50,13 @@ namespace InteractivePiano
             BlackTileList.Add(new BlackTileSprite(this, 416));
             BlackTileList.Add(new BlackTileSprite(this, 524));
             BlackTileList.Add(new BlackTileSprite(this, 578));
+            BlackTileList.Add(new BlackTileSprite(this, 686));
+            BlackTileList.Add(new BlackTileSprite(this, 740));
+            BlackTileList.Add(new BlackTileSprite(this, 794));
+            BlackTileList.Add(new BlackTileSprite(this, 902));
+            BlackTileList.Add(new BlackTileSprite(this, 956));
+            BlackTileList.Add(new BlackTileSprite(this, 1064));
+            BlackTileList.Add(new BlackTileSprite(this, 1118));
 
             for (int i = 0 ; i < BlackTileList.Count;i++) {
                 Components.Add(BlackTileList[i]);
@@ -66,6 +75,9 @@ namespace InteractivePiano
         {
             //q2we4r5ty7u8i9op-[=
             KeyboardState state = Keyboard.GetState();
+            if(GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || state.IsKeyDown(Keys.Escape)) {
+                Exit();
+            }
             KeyPressed(state);
             base.Update(gameTime);
         }
