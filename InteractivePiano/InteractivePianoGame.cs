@@ -66,194 +66,113 @@ namespace InteractivePiano
         {
             //q2we4r5ty7u8i9op-[=
             KeyboardState state = Keyboard.GetState();
+            KeyPressed(state);
+            base.Update(gameTime);
+        }
+
+        protected override void Draw(GameTime gameTime)
+        {
+            GraphicsDevice.Clear(Color.CornflowerBlue);
+
+            // TODO: Add your drawing code here
+
+            base.Draw(gameTime);
+        }
+
+        private void KeyPressed(KeyboardState state) {
             var strikes = new List<char>();
             if (state.IsKeyDown(Keys.Q)) {
-                for (int i = 0 ; i < WhiteTileList.Count; i++) {
-                    WhiteTileList[i].Color = Color.White;
-                }
-                for (int i = 0 ; i < BlackTileList.Count; i++) {
-                    BlackTileList[i].Color = Color.Black;
-                }
+                restartColors();
                 WhiteTileList[0].Color = Color.Gray;
                 strikes.Add('q');
             }
             else if (state.IsKeyDown(Keys.D2)) {
-                for (int i = 0 ; i < WhiteTileList.Count; i++) {
-                    WhiteTileList[i].Color = Color.White;
-                }
-                for (int i = 0 ; i < BlackTileList.Count; i++) {
-                    BlackTileList[i].Color = Color.Black;
-                }
+                restartColors();
                 BlackTileList[0].Color = Color.Gray;
                 strikes.Add('2');
             }
             else if (state.IsKeyDown(Keys.W)) {
-                for (int i = 0 ; i < WhiteTileList.Count; i++) {
-                    WhiteTileList[i].Color = Color.White;
-                }
-                for (int i = 0 ; i < BlackTileList.Count; i++) {
-                    BlackTileList[i].Color = Color.Black;
-                }
+                restartColors();
                 WhiteTileList[1].Color = Color.Gray;
                 strikes.Add('w');
             }
             else if (state.IsKeyDown(Keys.E)) {
-                for (int i = 0 ; i < WhiteTileList.Count; i++) {
-                    WhiteTileList[i].Color = Color.White;
-                }
-                for (int i = 0 ; i < BlackTileList.Count; i++) {
-                    BlackTileList[i].Color = Color.Black;
-                }
+                restartColors();
                 WhiteTileList[2].Color = Color.Gray;
                 strikes.Add('e');
             }
             else if (state.IsKeyDown(Keys.D4)) {
-                for (int i = 0 ; i < WhiteTileList.Count; i++) {
-                    WhiteTileList[i].Color = Color.White;
-                }
-                for (int i = 0 ; i < BlackTileList.Count; i++) {
-                    BlackTileList[i].Color = Color.Black;
-                }
+                restartColors();
                 BlackTileList[1].Color = Color.Gray;
                 strikes.Add('4');
             }
             else if (state.IsKeyDown(Keys.R)) {
-                for (int i = 0 ; i < WhiteTileList.Count; i++) {
-                    WhiteTileList[i].Color = Color.White;
-                }
-                for (int i = 0 ; i < BlackTileList.Count; i++) {
-                    BlackTileList[i].Color = Color.Black;
-                }
+                restartColors();
                 WhiteTileList[3].Color = Color.Gray;
                 strikes.Add('r');
             }
             else if (state.IsKeyDown(Keys.D5)) {
-                for (int i = 0 ; i < WhiteTileList.Count; i++) {
-                    WhiteTileList[i].Color = Color.White;
-                }
-                for (int i = 0 ; i < BlackTileList.Count; i++) {
-                    BlackTileList[i].Color = Color.Black;
-                }
+                restartColors();
                 BlackTileList[2].Color = Color.Gray;
                 strikes.Add('5');
             }
             else if (state.IsKeyDown(Keys.T)) {
-                for (int i = 0 ; i < WhiteTileList.Count; i++) {
-                    WhiteTileList[i].Color = Color.White;
-                }
-                for (int i = 0 ; i < BlackTileList.Count; i++) {
-                    BlackTileList[i].Color = Color.Black;
-                }
+                restartColors();
                 WhiteTileList[4].Color = Color.Gray;
                 strikes.Add('t');
             }
             else if (state.IsKeyDown(Keys.Y)) {
-                for (int i = 0 ; i < WhiteTileList.Count; i++) {
-                    WhiteTileList[i].Color = Color.White;
-                }
-                for (int i = 0 ; i < BlackTileList.Count; i++) {
-                    BlackTileList[i].Color = Color.Black;
-                }
+                restartColors();
                 WhiteTileList[5].Color = Color.Gray;
                 strikes.Add('y');
             }
             else if (state.IsKeyDown(Keys.D7)) {
-                for (int i = 0 ; i < WhiteTileList.Count; i++) {
-                    WhiteTileList[i].Color = Color.White;
-                }
-                for (int i = 0 ; i < BlackTileList.Count; i++) {
-                    BlackTileList[i].Color = Color.Black;
-                }
+                restartColors();
                 BlackTileList[3].Color = Color.Gray;
                 strikes.Add('7');
             }
             else if (state.IsKeyDown(Keys.U)) {
-                for (int i = 0 ; i < WhiteTileList.Count; i++) {
-                    WhiteTileList[i].Color = Color.White;
-                }
-                for (int i = 0 ; i < BlackTileList.Count; i++) {
-                    BlackTileList[i].Color = Color.Black;
-                }
+                restartColors();
                 WhiteTileList[6].Color = Color.Gray;
                 strikes.Add('u');
             }
             else if (state.IsKeyDown(Keys.D8)) {
-                for (int i = 0 ; i < WhiteTileList.Count; i++) {
-                    WhiteTileList[i].Color = Color.White;
-                }
-                for (int i = 0 ; i < BlackTileList.Count; i++) {
-                    BlackTileList[i].Color = Color.Black;
-                }
+                restartColors();
                 BlackTileList[4].Color = Color.Gray;
                 strikes.Add('8');
             }
             else if (state.IsKeyDown(Keys.I)) {
-                for (int i = 0 ; i < WhiteTileList.Count; i++) {
-                    WhiteTileList[i].Color = Color.White;
-                }
-                for (int i = 0 ; i < BlackTileList.Count; i++) {
-                    BlackTileList[i].Color = Color.Black;
-                }
+                restartColors();
                 WhiteTileList[7].Color = Color.Gray;
                 strikes.Add('i');
             }
             else if (state.IsKeyDown(Keys.D9)) {
-                for (int i = 0 ; i < WhiteTileList.Count; i++) {
-                    WhiteTileList[i].Color = Color.White;
-                }
-                for (int i = 0 ; i < BlackTileList.Count; i++) {
-                    BlackTileList[i].Color = Color.Black;
-                }
+                restartColors();
                 BlackTileList[5].Color = Color.Gray;
                 strikes.Add('9');
             }
             else if (state.IsKeyDown(Keys.O)) {
-                for (int i = 0 ; i < WhiteTileList.Count; i++) {
-                    WhiteTileList[i].Color = Color.White;
-                }
-                for (int i = 0 ; i < BlackTileList.Count; i++) {
-                    BlackTileList[i].Color = Color.Black;
-                }
+                restartColors();
                 WhiteTileList[8].Color = Color.Gray;
                 strikes.Add('o');
             }
             else if (state.IsKeyDown(Keys.P)) {
-                for (int i = 0 ; i < WhiteTileList.Count; i++) {
-                    WhiteTileList[i].Color = Color.White;
-                }
-                for (int i = 0 ; i < BlackTileList.Count; i++) {
-                    BlackTileList[i].Color = Color.Black;
-                }
+                restartColors();
                 WhiteTileList[9].Color = Color.Gray;
                 strikes.Add('p');
             }
             else if (state.IsKeyDown(Keys.OemMinus)) {
-                for (int i = 0 ; i < WhiteTileList.Count; i++) {
-                    WhiteTileList[i].Color = Color.White;
-                }
-                for (int i = 0 ; i < BlackTileList.Count; i++) {
-                    BlackTileList[i].Color = Color.Black;
-                }
+                restartColors();
                 BlackTileList[6].Color = Color.Gray;
                 strikes.Add('-');
             }
             else if (state.IsKeyDown(Keys.OemOpenBrackets)) {
-                for (int i = 0 ; i < WhiteTileList.Count; i++) {
-                    WhiteTileList[i].Color = Color.White;
-                }
-                for (int i = 0 ; i < BlackTileList.Count; i++) {
-                    BlackTileList[i].Color = Color.Black;
-                }
+                restartColors();
                 WhiteTileList[10].Color = Color.Gray;
                 strikes.Add('[');
             }
             else if (state.IsKeyDown(Keys.OemPlus)) {
-                for (int i = 0 ; i < WhiteTileList.Count; i++) {
-                    WhiteTileList[i].Color = Color.White;
-                }
-                for (int i = 0 ; i < BlackTileList.Count; i++) {
-                    BlackTileList[i].Color = Color.Black;
-                }
+                restartColors();
                 BlackTileList[7].Color = Color.Gray;
                 strikes.Add('=');
             }
@@ -265,16 +184,15 @@ namespace InteractivePiano
                 }
                 
             }
-            base.Update(gameTime);
         }
 
-        protected override void Draw(GameTime gameTime)
-        {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
-
-            // TODO: Add your drawing code here
-
-            base.Draw(gameTime);
+        private void restartColors() {
+            for (int i = 0 ; i < WhiteTileList.Count; i++) {
+                    WhiteTileList[i].Color = Color.White;
+                }
+                for (int i = 0 ; i < BlackTileList.Count; i++) {
+                    BlackTileList[i].Color = Color.Black;
+                }
         }
     }
 }
