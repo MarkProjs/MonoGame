@@ -13,6 +13,9 @@ namespace InteractivePiano
        private Piano piano;
        private Audio audio;
 
+        private List<WhiteTileSprite> _whiteTile;
+        private int _whiteMoveRight = 0;
+        private Color _whiteTilecolour = Color.White;
 
         public InteractivePianoGame()
         {
@@ -26,14 +29,20 @@ namespace InteractivePiano
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
+            _whiteTile = new List<WhiteTileSprite>();
+            for(int i = 0; i < 11 ; i++) {
+                WhiteTileSprite b = new WhiteTileSprite(this, _whiteMoveRight);
+                _whiteMoveRight +=54;
+                _whiteTile.Add(b);
+                Components.Add(b);
+            }
+           
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-
             // TODO: use this.Content to load your game content here
         }
 
@@ -69,9 +78,17 @@ namespace InteractivePiano
                 strikes.AddRange(KeyString);
             }
             else if (state.IsKeyDown(Keys.D2)) {
+                for (int i = 0 ; i < _whiteTile.Count; i++) {
+                    _whiteTile[i].Color = _whiteTile[i].Color;
+                }
+                _whiteTile[0].Color = Color.Gray;
                 strikes.Add('2');
             }
             else if (state.IsKeyDown(Keys.D4)) {
+                for (int i = 0 ; i < _whiteTile.Count; i++) {
+                    _whiteTile[i].Color = Color.White;
+                }
+                _whiteTile[1].Color = Color.Gray;
                 strikes.Add('4');
             }
             else if (state.IsKeyDown(Keys.D5)) {
@@ -116,10 +133,12 @@ namespace InteractivePiano
 
             foreach (char strikeKey in strikes) {
                 piano.StrikeKey(strikeKey);
+                audio.Reset();
                 for (int i = 0; i < 44100 * 3; i++) {
+                    
                     audio.Play(piano.Play());
                 }
-                audio.Reset();
+                
             }
         }
     }
