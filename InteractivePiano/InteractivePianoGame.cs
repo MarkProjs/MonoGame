@@ -13,10 +13,10 @@ namespace InteractivePiano
        private Piano piano;
        private Audio audio;
 
-        private List<WhiteTileSprite> _whiteTile;
-        private int _whiteMoveRight = 0;
-        private Color _whiteTilecolour = Color.White;
+        private List<WhiteTileSprite> WhiteTileList = new List<WhiteTileSprite>();
+        private List<BlackTileSprite> BlackTileList = new List<BlackTileSprite>();
 
+        private int _whiteTileMoveRight = 0;
         public InteractivePianoGame()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -29,12 +29,28 @@ namespace InteractivePiano
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            _whiteTile = new List<WhiteTileSprite>();
-            for(int i = 0; i < 11 ; i++) {
-                WhiteTileSprite b = new WhiteTileSprite(this, _whiteMoveRight);
-                _whiteMoveRight +=54;
-                _whiteTile.Add(b);
+            //white, black, white, white, black, white, black, white, white, black, white
+            //black, white, black, white, white, black, white, black
+            
+            
+            for (int i = 0; i< 11;i++) {
+                WhiteTileSprite b = new WhiteTileSprite(this, _whiteTileMoveRight);
+                WhiteTileList.Add(b);
                 Components.Add(b);
+                _whiteTileMoveRight += 54;
+            }
+
+            BlackTileList.Add(new BlackTileSprite(this, 38));
+            BlackTileList.Add(new BlackTileSprite(this, 146));
+            BlackTileList.Add(new BlackTileSprite(this, 200));
+            BlackTileList.Add(new BlackTileSprite(this, 308));
+            BlackTileList.Add(new BlackTileSprite(this, 362));
+            BlackTileList.Add(new BlackTileSprite(this, 416));
+            BlackTileList.Add(new BlackTileSprite(this, 524));
+            BlackTileList.Add(new BlackTileSprite(this, 578));
+
+            for (int i = 0 ; i < BlackTileList.Count;i++) {
+                Components.Add(BlackTileList[i]);
             }
            
             base.Initialize();
@@ -48,6 +64,7 @@ namespace InteractivePiano
 
         protected override void Update(GameTime gameTime)
         {
+            //q2we4r5ty7u8i9op-[=
             KeyboardState state = Keyboard.GetState();
             if (state.IsKeyDown(Keys.Escape))
                 Exit();
@@ -78,17 +95,17 @@ namespace InteractivePiano
                 strikes.AddRange(KeyString);
             }
             else if (state.IsKeyDown(Keys.D2)) {
-                for (int i = 0 ; i < _whiteTile.Count; i++) {
-                    _whiteTile[i].Color = _whiteTile[i].Color;
+                for (int i = 0 ; i < WhiteTileList.Count; i++) {
+                    WhiteTileList[i].Color = Color.White;
                 }
-                _whiteTile[0].Color = Color.Gray;
+                WhiteTileList[0].Color = Color.Gray;
                 strikes.Add('2');
             }
             else if (state.IsKeyDown(Keys.D4)) {
-                for (int i = 0 ; i < _whiteTile.Count; i++) {
-                    _whiteTile[i].Color = Color.White;
+                for (int i = 0 ; i < WhiteTileList.Count; i++) {
+                    WhiteTileList[i].Color = Color.White;
                 }
-                _whiteTile[1].Color = Color.Gray;
+                WhiteTileList[1].Color = Color.Gray;
                 strikes.Add('4');
             }
             else if (state.IsKeyDown(Keys.D5)) {
@@ -135,7 +152,6 @@ namespace InteractivePiano
                 piano.StrikeKey(strikeKey);
                 audio.Reset();
                 for (int i = 0; i < 44100 * 3; i++) {
-                    
                     audio.Play(piano.Play());
                 }
                 
