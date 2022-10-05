@@ -93,6 +93,45 @@ namespace InteractivePiano
 
         private void KeyPressed(KeyboardState state) {
             var strikes = new List<char>();
+            var keyDict = new Dictionary<Keys, char> {
+                {Keys.Q, 'q'},
+                {Keys.D2, '2'},
+                {Keys.W, 'w'},
+                {Keys.Q, 'q'},
+                {Keys.Q, 'q'},
+                {Keys.Q, 'q'},
+                {Keys.Q, 'q'},
+                {Keys.Q, 'q'},
+                {Keys.Q, 'q'},
+                {Keys.Q, 'q'},
+                {Keys.Q, 'q'},
+                {Keys.Q, 'q'},
+                {Keys.Q, 'q'},
+                {Keys.Q, 'q'},
+                {Keys.Q, 'q'},
+                {Keys.Q, 'q'},
+                {Keys.Q, 'q'},
+                {Keys.Q, 'q'},
+                {Keys.Q, 'q'},
+                {Keys.Q, 'q'},
+                {Keys.Q, 'q'},
+                {Keys.Q, 'q'},
+                {Keys.Q, 'q'},
+                {Keys.Q, 'q'},
+                {Keys.Q, 'q'},
+                {Keys.Q, 'q'},
+                {Keys.Q, 'q'},
+                {Keys.Q, 'q'},
+                {Keys.Q, 'q'},
+                {Keys.Q, 'q'},
+                {Keys.Q, 'q'},
+                {Keys.Q, 'q'},
+                {Keys.Q, 'q'},
+                {Keys.Q, 'q'},
+                {Keys.Q, 'q'},
+                {Keys.Q, 'q'},
+                {Keys.Q, 'q'}  
+            };
             if (state.IsKeyDown(Keys.Q)) {
                 RestartColors();
                 WhiteTileList[0].Color = Color.Gray;
