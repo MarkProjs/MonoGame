@@ -82,97 +82,97 @@ namespace InteractivePiano
         private void KeyPressed(KeyboardState state) {
             var strikes = new List<char>();
             if (state.IsKeyDown(Keys.Q)) {
-                restartColors();
+                RestartColors();
                 WhiteTileList[0].Color = Color.Gray;
                 strikes.Add('q');
             }
             else if (state.IsKeyDown(Keys.D2)) {
-                restartColors();
+                RestartColors();
                 BlackTileList[0].Color = Color.Gray;
                 strikes.Add('2');
             }
             else if (state.IsKeyDown(Keys.W)) {
-                restartColors();
+                RestartColors();
                 WhiteTileList[1].Color = Color.Gray;
                 strikes.Add('w');
             }
             else if (state.IsKeyDown(Keys.E)) {
-                restartColors();
+                RestartColors();
                 WhiteTileList[2].Color = Color.Gray;
                 strikes.Add('e');
             }
             else if (state.IsKeyDown(Keys.D4)) {
-                restartColors();
+                RestartColors();
                 BlackTileList[1].Color = Color.Gray;
                 strikes.Add('4');
             }
             else if (state.IsKeyDown(Keys.R)) {
-                restartColors();
+                RestartColors();
                 WhiteTileList[3].Color = Color.Gray;
                 strikes.Add('r');
             }
             else if (state.IsKeyDown(Keys.D5)) {
-                restartColors();
+                RestartColors();
                 BlackTileList[2].Color = Color.Gray;
                 strikes.Add('5');
             }
             else if (state.IsKeyDown(Keys.T)) {
-                restartColors();
+                RestartColors();
                 WhiteTileList[4].Color = Color.Gray;
                 strikes.Add('t');
             }
             else if (state.IsKeyDown(Keys.Y)) {
-                restartColors();
+                RestartColors();
                 WhiteTileList[5].Color = Color.Gray;
                 strikes.Add('y');
             }
             else if (state.IsKeyDown(Keys.D7)) {
-                restartColors();
+                RestartColors();
                 BlackTileList[3].Color = Color.Gray;
                 strikes.Add('7');
             }
             else if (state.IsKeyDown(Keys.U)) {
-                restartColors();
+                RestartColors();
                 WhiteTileList[6].Color = Color.Gray;
                 strikes.Add('u');
             }
             else if (state.IsKeyDown(Keys.D8)) {
-                restartColors();
+                RestartColors();
                 BlackTileList[4].Color = Color.Gray;
                 strikes.Add('8');
             }
             else if (state.IsKeyDown(Keys.I)) {
-                restartColors();
+                RestartColors();
                 WhiteTileList[7].Color = Color.Gray;
                 strikes.Add('i');
             }
             else if (state.IsKeyDown(Keys.D9)) {
-                restartColors();
+                RestartColors();
                 BlackTileList[5].Color = Color.Gray;
                 strikes.Add('9');
             }
             else if (state.IsKeyDown(Keys.O)) {
-                restartColors();
+                RestartColors();
                 WhiteTileList[8].Color = Color.Gray;
                 strikes.Add('o');
             }
             else if (state.IsKeyDown(Keys.P)) {
-                restartColors();
+                RestartColors();
                 WhiteTileList[9].Color = Color.Gray;
                 strikes.Add('p');
             }
             else if (state.IsKeyDown(Keys.OemMinus)) {
-                restartColors();
+                RestartColors();
                 BlackTileList[6].Color = Color.Gray;
                 strikes.Add('-');
             }
             else if (state.IsKeyDown(Keys.OemOpenBrackets)) {
-                restartColors();
+                RestartColors();
                 WhiteTileList[10].Color = Color.Gray;
                 strikes.Add('[');
             }
             else if (state.IsKeyDown(Keys.OemPlus)) {
-                restartColors();
+                RestartColors();
                 BlackTileList[7].Color = Color.Gray;
                 strikes.Add('=');
             }
@@ -186,7 +186,7 @@ namespace InteractivePiano
             }
         }
 
-        private void restartColors() {
+        private void RestartColors() {
             for (int i = 0 ; i < WhiteTileList.Count; i++) {
                     WhiteTileList[i].Color = Color.White;
                 }
