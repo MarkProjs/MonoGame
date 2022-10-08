@@ -101,7 +101,7 @@ namespace InteractivePiano
                 {Keys.D8, '8'},{Keys.I, 'i'},{Keys.D9, '9'},{Keys.O, 'o'},
                 {Keys.P, 'p'},{Keys.OemMinus, '-'},{Keys.OemOpenBrackets, '['},
                 {Keys.OemPlus, '='},{Keys.Z, 'z'},{Keys.X, 'x'},{Keys.D, 'd'},
-                {Keys.C, 'c'},{Keys.F, 'f'},{Keys.V, 'v'},{Keys.G, 'b'},
+                {Keys.C, 'c'},{Keys.F, 'f'},{Keys.V, 'v'},{Keys.G, 'g'},
                 {Keys.B, 'b'},{Keys.N, 'n'},{Keys.J, 'j'},{Keys.M, 'm'},{Keys.K, 'k'},
                 {Keys.OemComma, ','},{Keys.OemPeriod, '.'},{Keys.OemSemicolon, ';'},
                 {Keys.OemQuestion, '/'},{Keys.OemQuotes, '\''},{Keys.Space, ' '}
