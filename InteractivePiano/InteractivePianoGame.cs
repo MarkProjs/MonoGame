@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
 using PianoSimulation;
+using System.Threading.Tasks;
 
 namespace InteractivePiano
 {
@@ -24,7 +25,7 @@ namespace InteractivePiano
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
             piano = new Piano();
-            audio = new Audio();
+            audio = Audio.Instance;
         }
 
         protected override void Initialize()
@@ -111,7 +112,6 @@ namespace InteractivePiano
             {
                 if (state.IsKeyDown(tile.Key)) {
                     RestartColors();
-                    piano.StrikeKey(tile.Value);
                     if (whiteKeys.Contains(tile.Value)) {
                         for (int i = 0;i < WhiteTileList.Count;i++) {
                             if (WhiteTileList[i].KeyChar == tile.Value) {
@@ -125,11 +125,14 @@ namespace InteractivePiano
                                 BlackTileList[i].Color = Color.Red;
                             }
                         }
-                    }
+                    } 
+                    piano.StrikeKey(tile.Value);
                     audio.Reset();
-                    for (int i = 0; i < 44100 * 3; i++) {
+                    Task.Run(() =>{
+                        for (int i = 0; i < 44100 * 3; i++) {
                         audio.Play(piano.Play());
-                    }
+                        }
+                    });    
                 }
             }
         }
