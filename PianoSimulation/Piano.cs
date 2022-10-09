@@ -34,10 +34,8 @@ namespace PianoSimulation
             for (int i = 0; i < Keys.Length;i++) {
                 pianoKeys.Add("Key: " + Keys[i] +  " Note Frequency: " + _pianoWires[i].NoteFrequency);
             }
-
             return pianoKeys;
         }
-
         public string Keys { get;}
     }
 }

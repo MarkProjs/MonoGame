@@ -51,11 +51,9 @@ namespace InteractivePiano
             _bufferedWaveProvider.ClearBuffer();
             
         }
-
         public void Dispose() {
-            _bufferedWaveProvider = null;
-            _waveOut = null;
-            _waveOut.Stop();
+            _bufferedWaveProvider.ClearBuffer();
+             _waveOut.Stop();
         }
 
         /// <summary>
