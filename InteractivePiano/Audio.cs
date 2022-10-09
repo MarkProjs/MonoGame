@@ -44,17 +44,13 @@ namespace InteractivePiano
         }
 
         public void Reset() {
-            if (_bufferCount != 0 && _bufferedWaveProvider != null) {
-                _bufferCount = 0;
-                _bufferedWaveProvider.ClearBuffer();
-            }
-            
+            _bufferCount = 0;
+            _bufferedWaveProvider.ClearBuffer();
             
         }
         public void Dispose() {
             _bufferedWaveProvider.ClearBuffer();
-             _waveOut.Stop();
-             _waveOut.Dispose();
+            _waveOut.Stop();
         }
 
         /// <summary>
