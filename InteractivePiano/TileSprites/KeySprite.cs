@@ -33,7 +33,7 @@ namespace InteractivePiano
 
         public override void Draw(GameTime gameTime) {
             _spriteBatch.Begin();
-            _spriteBatch.Draw(_tileTexture, new Vector2(_moveRight, 130), _colorTile);
+            _spriteBatch.Draw(_tileTexture, new Vector2(_moveRight, 150), _colorTile);
             _spriteBatch.End();
             base.Draw(gameTime);
         }

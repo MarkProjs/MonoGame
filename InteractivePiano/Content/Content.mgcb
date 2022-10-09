@@ -25,6 +25,13 @@
 /processorParam:TextureFormat=Color
 /build:BlackTile.png
 
+#begin NoteFont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:NoteFont.spritefont
+
 #begin WhiteTile.png
 /importer:TextureImporter
 /processor:TextureProcessor

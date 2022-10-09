@@ -15,10 +15,12 @@ namespace InteractivePiano
        private SpriteBatch _spriteBatch;
        private Piano piano;
        private Audio audio;
-
         private List<KeySprite> _tileList = new List<KeySprite>();
         private string _whiteKeys = "qwertyuiop[zxcvbnm,./ ";
         private string _blackKeys = "245789-=dfgjk;\'";
+        private string[] _whiteNote = {"A","B","C","D","E","F","G","A","B","C","D","E","F","G","A","B","C","D","E","F","G","A"};
+        private string[] _blackNote = {"A#", "C#", "D#", "F#", "G#", "A#", "C#", "D#", "F#", "G#", "A#", "C#", "D#", "F#", "G#"};
+        private List<NoteSprite> _keyNotes = new List<NoteSprite>();
 
         public InteractivePianoGame()
         {
@@ -34,32 +36,8 @@ namespace InteractivePiano
             _graphics.PreferredBackBufferWidth = 1200;
             _graphics.ApplyChanges();
             //full keys: q2we4r5ty7u8i9op-[=zxdcfvgbnjmk,.;/' 
-            //whitetile: qwertyuiop[zxcvbnm,./*space*
-            //blacktile: 245789-=dfgjk;'
-            // TODO: Add your initialization logic here
-            //white, black, white, white, black, white, black, white, white, black, white
-            //black, white, black, white, white, black, white, black
-            
-            for (int i = 0; i< 22;i++) {
-                KeySprite w = new WhiteTileSprite(this, (i*54), _whiteKeys[i]);
-                _tileList.Add(w); 
-            }
-            
-            int initialVal = 38;
-            int[] _doubleInitVal = {0, 2, 5, 7, 10, 12};
-            for (int i =0 ; i < 15 ; i++) {
-                KeySprite b = new BlackTileSprite(this, ((i*54) + initialVal), _blackKeys[i]);
-                _tileList.Add(b);
-                //insert the black keys
-                if (_doubleInitVal.Contains(i)) {
-                    initialVal = initialVal + 54;
-                }
-                
-            }
-
-            for (int i = 0; i < _tileList.Count;i++) {
-                Components.Add(_tileList[i]);
-            }
+           //insert the tiles in the initialization
+           InsertTilesAndNotes();
             base.Initialize();
         }
 
@@ -107,6 +85,7 @@ namespace InteractivePiano
                             if (_tileList[i] is WhiteTileSprite) {
                                 if (((WhiteTileSprite)_tileList[i]).KeyChar == tile.Value) {
                                     ((WhiteTileSprite)_tileList[i]).Color = Color.Red;
+                                    ((WhiteNoteSprite)_keyNotes[i]).Color = Color.Red;
                                 }
                             }
                         }
@@ -116,16 +95,19 @@ namespace InteractivePiano
                             if (_tileList[i] is BlackTileSprite) {
                                 if (((BlackTileSprite)_tileList[i]).KeyChar == tile.Value) {
                                     ((BlackTileSprite)_tileList[i]).Color = Color.Red;
+                                    ((BlackNoteSprite)_keyNotes[i]).Color = Color.Red;
                                 }
                             }
                         }
                     } 
+                    
                     Task.Run(() =>{
-                        piano.StrikeKey(tile.Value);
                         audio.Reset();
+                        piano.StrikeKey(tile.Value);
                         for (int i = 0; i < 44100 * 3; i++) {
                             audio.Play(piano.Play());
                         }
+                         
                     });  
                 }
             }
@@ -133,16 +115,43 @@ namespace InteractivePiano
 
         private void RestartColors() {
             for (int i = 0 ; i < _tileList.Count; i++) {
-                    if (_tileList[i] is WhiteTileSprite) {
-                        ((WhiteTileSprite)_tileList[i]).Color = Color.White;
-                    }
-                    
-            }
-            for (int i = 0 ; i < _tileList.Count; i++) {
-                if (_tileList[i] is BlackTileSprite) {
-                     ((BlackTileSprite)_tileList[i]).Color = Color.Black;
+                if (_tileList[i] is WhiteTileSprite) {
+                    ((WhiteTileSprite)_tileList[i]).Color = Color.White;
                 }
-                
+                else if (_tileList[i] is BlackTileSprite) {
+                    ((BlackTileSprite)_tileList[i]).Color = Color.Black;
+                }
+                _keyNotes[i].Color = Color.Transparent;
+            }
+        }
+
+        private void InsertTilesAndNotes() {
+            //inserting the white tiles and white notes
+            for (int i = 0; i< 22;i++) {
+                NoteSprite nw = new WhiteNoteSprite(this, ((i*54) + 20), _whiteNote[i], _whiteKeys[i]);
+                _keyNotes.Add(nw);
+                KeySprite w = new WhiteTileSprite(this, (i*54), _whiteKeys[i]);
+                _tileList.Add(w); 
+            }
+            
+             //insert the black keys and their notes
+            int initialValKey = 38;
+            int initialValNote = 41;
+            int[] _doubleInitVal = {0, 2, 5, 7, 10, 12};
+            for (int i =0 ; i < 15 ; i++) {
+                NoteSprite nb = new BlackNoteSprite(this, ((i*54)+initialValNote), _blackNote[i], _blackKeys[i]);
+                _keyNotes.Add(nb);
+                KeySprite b = new BlackTileSprite(this, ((i*54) + initialValKey), _blackKeys[i]);
+                _tileList.Add(b);
+                if (_doubleInitVal.Contains(i)) {
+                    initialValNote = initialValNote + 54;
+                    initialValKey = initialValKey + 54;
+                } 
+            }
+
+            for (int i = 0; i < _tileList.Count;i++) {
+                Components.Add(_keyNotes[i]);
+                Components.Add(_tileList[i]);
             }
         }
     }

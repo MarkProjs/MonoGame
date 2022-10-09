@@ -8,8 +8,8 @@ namespace InteractivePiano
     /// </summary>
     public sealed class Audio: IDisposable
     {
-        private static Audio instance = null;
-        private static object padlock = new object();
+        private static readonly Audio instance = new Audio();
+        private static readonly object padlock = new object();
         private WaveOutEvent _waveOut;
         private WaveFormat _waveFormat;
         private BufferedWaveProvider _bufferedWaveProvider;
@@ -37,9 +37,6 @@ namespace InteractivePiano
         public static Audio Instance {
             get {
                 lock (padlock) {
-                    if (instance == null) {
-                        instance = new Audio();
-                    }
                     return instance;
                 }
                 
@@ -47,13 +44,17 @@ namespace InteractivePiano
         }
 
         public void Reset() {
-            _bufferCount = 0;
-            _bufferedWaveProvider.ClearBuffer();
+            if (_bufferCount != 0 && _bufferedWaveProvider != null) {
+                _bufferCount = 0;
+                _bufferedWaveProvider.ClearBuffer();
+            }
+            
             
         }
         public void Dispose() {
             _bufferedWaveProvider.ClearBuffer();
              _waveOut.Stop();
+             _waveOut.Dispose();
         }
 
         /// <summary>
