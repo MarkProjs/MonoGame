@@ -58,7 +58,9 @@ namespace InteractivePiano
         /// </summary>
         /// <param name="input">Sample to be played</param>
         public void Play(double input)
-        {
+        {   
+            if (input < -1.0) input = -1.0;
+            if (input > +1.0) input = +1.0;
             short s = ConvertToShort(input);
             byte[] temp = BitConverter.GetBytes(s);
             lock (padlock) {
