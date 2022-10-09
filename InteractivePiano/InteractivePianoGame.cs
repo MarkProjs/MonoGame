@@ -17,8 +17,8 @@ namespace InteractivePiano
        private Audio audio;
 
         private List<KeySprite> _tileList = new List<KeySprite>();
-        private string whiteKeys = "qwertyuiop[zxcvbnm,./ ";
-        private string blackKeys = "245789-=dfgjk;\'";
+        private string _whiteKeys = "qwertyuiop[zxcvbnm,./ ";
+        private string _blackKeys = "245789-=dfgjk;\'";
 
         public InteractivePianoGame()
         {
@@ -39,36 +39,23 @@ namespace InteractivePiano
             // TODO: Add your initialization logic here
             //white, black, white, white, black, white, black, white, white, black, white
             //black, white, black, white, white, black, white, black
-            int initialVal = 38;
-            int[] _doubleInitVal = {0, 2, 5, 9, 12, 16, 19};
+            
             for (int i = 0; i< 22;i++) {
-                KeySprite w = new WhiteTileSprite(this, (i*54), whiteKeys[i]);
-                _tileList.Add(w);
-
+                KeySprite w = new WhiteTileSprite(this, (i*54), _whiteKeys[i]);
+                _tileList.Add(w); 
+            }
+            
+            int initialVal = 38;
+            int[] _doubleInitVal = {0, 2, 5, 7, 10, 12};
+            for (int i =0 ; i < 15 ; i++) {
+                KeySprite b = new BlackTileSprite(this, ((i*54) + initialVal), _blackKeys[i]);
+                _tileList.Add(b);
                 //insert the black keys
                 if (_doubleInitVal.Contains(i)) {
                     initialVal = initialVal + 54;
                 }
-                KeySprite b = new BlackTileSprite(this, ((i*54) +initialVal), blackKeys[i]);
-                _tileList.Add(b);
+                
             }
-
-            
-            _tileList.Add(new BlackTileSprite(this, 38, (char)blackKeys[0]));
-            _tileList.Add(new BlackTileSprite(this, 146, (char)blackKeys[1]));
-            _tileList.Add(new BlackTileSprite(this, 200, (char)blackKeys[2]));
-            _tileList.Add(new BlackTileSprite(this, 308, (char)blackKeys[3]));
-            _tileList.Add(new BlackTileSprite(this, 362, (char)blackKeys[4]));
-            _tileList.Add(new BlackTileSprite(this, 416, (char)blackKeys[5]));
-            _tileList.Add(new BlackTileSprite(this, 524, (char)blackKeys[6]));
-            _tileList.Add(new BlackTileSprite(this, 578, (char)blackKeys[7]));
-            _tileList.Add(new BlackTileSprite(this, 686, (char)blackKeys[8]));
-            _tileList.Add(new BlackTileSprite(this, 740, (char)blackKeys[9]));
-            _tileList.Add(new BlackTileSprite(this, 794, (char)blackKeys[10]));
-            _tileList.Add(new BlackTileSprite(this, 902, (char)blackKeys[11]));
-            _tileList.Add(new BlackTileSprite(this, 956, (char)blackKeys[12]));
-            _tileList.Add(new BlackTileSprite(this, 1064, (char)blackKeys[13]));
-            _tileList.Add(new BlackTileSprite(this, 1118, (char)blackKeys[14]));
 
             for (int i = 0; i < _tileList.Count;i++) {
                 Components.Add(_tileList[i]);
@@ -115,7 +102,7 @@ namespace InteractivePiano
             {
                 if (state.IsKeyDown(tile.Key)) {
                     RestartColors();
-                    if (whiteKeys.Contains(tile.Value)) {
+                    if (_whiteKeys.Contains(tile.Value)) {
                         for (int i = 0;i < _tileList.Count;i++) {
                             if (_tileList[i] is WhiteTileSprite) {
                                 if (((WhiteTileSprite)_tileList[i]).KeyChar == tile.Value) {
@@ -124,7 +111,7 @@ namespace InteractivePiano
                             }
                         }
                     }
-                    else if (blackKeys.Contains(tile.Value)) {
+                    else if (_blackKeys.Contains(tile.Value)) {
                         for (int i = 0 ; i < _tileList.Count;i++) {
                             if (_tileList[i] is BlackTileSprite) {
                                 if (((BlackTileSprite)_tileList[i]).KeyChar == tile.Value) {
