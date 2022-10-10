@@ -8,8 +8,8 @@ namespace InteractivePiano
     /// </summary>
     public sealed class Audio: IDisposable
     {
-        private static readonly Audio instance = new Audio();
-        private static readonly object padlock = new object();
+        private static readonly Audio _instance = new Audio();
+        private static readonly object _padlock = new object();
         private WaveOutEvent _waveOut;
         private WaveFormat _waveFormat;
         private BufferedWaveProvider _bufferedWaveProvider;
@@ -36,18 +36,8 @@ namespace InteractivePiano
         
         public static Audio Instance {
             get {
-                return instance;
+                return _instance;
             }
-        }
-
-        public void Reset() {
-            _bufferCount = 0;
-            _bufferedWaveProvider.ClearBuffer();
-            
-        }
-        public void Dispose() {
-            _bufferedWaveProvider.ClearBuffer();
-            _waveOut.Stop();
         }
 
         /// <summary>
@@ -60,7 +50,7 @@ namespace InteractivePiano
             if (input > +1.0) input = +1.0;
             short s = ConvertToShort(input);
             byte[] temp = BitConverter.GetBytes(s);
-            lock (padlock) {
+            lock (_padlock) {
                 // clip if outside [-1, +1]
                 _buffer[_bufferCount++] = temp[0];
                 _buffer[_bufferCount++] = temp[1]; //little Endian
@@ -133,6 +123,18 @@ namespace InteractivePiano
                 }
                 waveWriter.WriteSamples(samples, 0, samples.Length);
             }
+        }
+
+        public void Reset() {
+            _bufferCount = 0;
+            _bufferedWaveProvider.ClearBuffer();
+            
+        }
+
+        public void Dispose() {
+            _bufferedWaveProvider.ClearBuffer();
+            _waveOut.Stop();
+            _waveOut.Dispose();
         }
     }
 }

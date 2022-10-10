@@ -13,8 +13,8 @@ namespace InteractivePiano
     {
         private GraphicsDeviceManager _graphics;
        private SpriteBatch _spriteBatch;
-       private Piano piano;
-       private Audio audio;
+       private Piano _piano;
+       private Audio _audio;
         private List<KeySprite> _tileList = new List<KeySprite>();
         private string _whiteKeys = "qwertyuiop[zxcvbnm,./ ";
         private string _blackKeys = "245789-=dfgjk;\'";
@@ -27,8 +27,8 @@ namespace InteractivePiano
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
-            piano = new Piano();
-            audio = Audio.Instance;
+            _piano = new Piano();
+            _audio = Audio.Instance;
         }
 
         protected override void Initialize()
@@ -101,11 +101,13 @@ namespace InteractivePiano
                         }
                     } 
 
-                    audio.Reset();
-                    piano.StrikeKey(tile.Value);
+                   
+                   
                     Task.Run(() => {
+                        _audio.Reset();
+                         _piano.StrikeKey(tile.Value);
                         for (int i = 0; i < 44100 * 3; i++) {
-                            audio.Play(piano.Play());
+                            _audio.Play(_piano.Play());
                         }  
                     });
                     
