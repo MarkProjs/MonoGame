@@ -100,10 +100,10 @@ namespace InteractivePiano
                             }
                         }
                     } 
-                    
+
+                    audio.Reset();
+                    piano.StrikeKey(tile.Value);
                     Task.Run(() => {
-                        audio.Reset();
-                        piano.StrikeKey(tile.Value);
                         for (int i = 0; i < 44100 * 3; i++) {
                             audio.Play(piano.Play());
                         }  

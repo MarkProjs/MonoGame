@@ -36,10 +36,7 @@ namespace InteractivePiano
         
         public static Audio Instance {
             get {
-                lock (padlock) {
-                    return instance;
-                }
-                
+                return instance;
             }
         }
 
